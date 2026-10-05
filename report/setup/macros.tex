@@ -1,0 +1,166 @@
+% see, e.g., http://en.wikibooks.org/wiki/LaTeX/Customizing_LaTeX#New_commands
+% for more information on how to create macros
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for the titlepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Creates the aau titlepage
+\newcommand{\aautitlepage}[3]{
+  \begin{titlepage}
+  \thispagestyle{empty}
+  \sffamily
+
+  \noindent
+  \begin{minipage}[t]{0.47\textwidth}
+    \vspace{0pt}
+    \includegraphics[width=\linewidth]{report/AAUgraphics/aau_logo_en.pdf}
+
+    \vspace{1.5cm}
+
+    #1
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.47\textwidth}
+    \vspace{0pt}
+    \raggedleft
+    \small
+    #2
+
+    \vspace{1.5cm}
+
+    \raggedright
+    \normalsize
+    \textbf{Abstract:}\par
+    \vspace{0.5em}
+
+    \fbox{%
+      \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+        \small
+        #3
+      \end{minipage}%
+    }
+  \end{minipage}
+
+  \vfill
+
+  \noindent
+  {\footnotesize\emph{%
+    When uploading this document to Digital Exam each group member confirms that all have participated equally in the project work and that they collectively are responsible for the content of the project report. Furthermore each group member is liable for that there is no plagiarism in the report.%
+  }}
+
+  \end{titlepage}
+}
+
+%Create english project info
+\newcommand{\englishprojectinfo}[8]{%
+  \textbf{Semester:} #1\bigskip\par
+  \textbf{Title:}\\ #2\bigskip\par
+  \textbf{Theme:}\\ #3\bigskip\par
+  \textbf{Project Period:}\\ #4\bigskip\par
+  \textbf{Project Group:} #5\bigskip\par
+  \textbf{Members:}\\ #6\bigskip\par
+  \textbf{Supervisor:}\\ #7\bigskip\par
+  \textbf{Page Count:} \number\numexpr\getpagerefnumber{mainmatter:end}-\getpagerefnumber{mainmatter:start}+1\relax\bigskip\par
+  \textbf{Date of Completion:}\\ #8
+}
+
+%Create danish project info
+\newcommand{\danishprojectinfo}[8]{%
+  \parbox[t]{\titlepageleftcolumnwidth}{
+    \textbf{Titel:}\\ #1\bigskip\par
+    \textbf{Tema:}\\ #2\bigskip\par
+    \textbf{Projektperiode:}\\ #3\bigskip\par
+    \textbf{Projektgruppe:}\\ #4\bigskip\par
+    \textbf{Deltager(e):}\\ #5\bigskip\par
+    \textbf{Vejleder(e):}\\ #6\bigskip\par
+    \textbf{Oplagstal:} #7\bigskip\par
+    \textbf{Sidetal:} \number\numexpr\getpagerefnumber{mainmatter:end}-\getpagerefnumber{mainmatter:start}+1\relax\bigskip\par
+    \textbf{Afleveringsdato:}\\ #8
+  }
+}
+
+\newcommand{\codebase}{../app/}
+\newcommand{\unsecureCodebase}{../unsecure_app/}
+
+\NewDocumentCommand{\insertcode}{ O{typescript} m }{
+  \StrBehind[2]{#2}{/}[\filename]
+  \begin{sourceblock}
+    \captionof{source}{\filename}
+    \label{code:\filename}
+    \inputminted[
+      frame=lines,
+      framesep=2mm,
+      baselinestretch=0.9,
+      fontsize=\footnotesize,
+      linenos,
+      breaklines,
+      breakanywhere=true
+    ]{#1}{#2}
+  \end{sourceblock}
+}
+
+\NewDocumentCommand{\insertcodeblock}{ O{typescript} m m m m }{
+ \StrBehind[2]{#2}{/}[\filename]
+\begin{minipage}{\linewidth}
+  \begin{codeblock}
+    \captionof{code}{#5 (\textit{\filename} #3--#4)}
+    \label{code-block:\filename:#3-#4}
+    \inputminted[
+      frame=lines,
+      framesep=2mm,
+      baselinestretch=0.9,
+      fontsize=\footnotesize,
+      firstline=#3,
+      lastline=#4,
+      linenos,
+      breaklines,
+      breakanywhere=true
+    ]{#1}{#2}
+  \end{codeblock}
+  \end{minipage}
+}
+
+\NewDocumentEnvironment{insertcodeexample}{ O{typescript} o }
+{%
+  \VerbatimEnvironment
+  \begin{sourceblock}%
+  \IfValueT{#2}{\captionof{source}{#2}}%
+  \begin{minted}[
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=0.9,
+    fontsize=\footnotesize,
+    linenos,
+    breaklines,
+    breakanywhere=true
+  ]{#1}%
+}
+{%
+  \end{minted}%
+  \end{sourceblock}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% An example environment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremheaderfont{\normalfont\bfseries}
+\theorembodyfont{\normalfont}
+\theoremstyle{break}
+\def\theoremframecommand{{\color{gray!50}\vrule width 5pt \hspace{5pt}}}
+%\newshadedtheorem{exa}{Example}[chapter]
+\newenvironment{example}[1]{%
+		\begin{exa}[#1]
+}{%
+		\end{exa}
+}
+
+% Macro: \wrapimage
+\newcommand{\wrapimage}[4]{%
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.35\linewidth]{#2}
+  \captionsetup{width=\linewidth, justification=centering, font=footnotesize, labelfont=bf}
+  \caption{#3}
+  \label{fig:#4}
+\end{figure}
+}

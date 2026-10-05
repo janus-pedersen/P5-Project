@@ -1,0 +1,77 @@
+\pdfbookmark[0]{Front page}{label:frontpage}%
+
+\definecolor{aaublue}{RGB}{ 33, 26, 82}
+
+\begin{titlepage}
+\newgeometry{top=0cm,bottom=1.2cm,right=0cm,left=0cm}
+\AddToShipoutPictureBG*{%
+  \AtPageLowerLeft{%
+    \includegraphics[width=\paperwidth,height=\paperheight]{report/AAUgraphics/aau_waves.pdf}%
+  }%
+}
+		
+  \captionsetup{labelformat=empty}
+  \begin{center} %%please do not change the height or width of the frontpage image    
+    \begin{figure}
+
+    \includegraphics[totalheight=0.6\paperwidth,width=1\paperwidth]{report/content/front-page-image.jpg} %% Insert image
+    \par\makebox[\paperwidth][l]{%
+      \colorbox{aaublue}{\color{white} Photo by \href{https://unsplash.com/photos/10-and-one-10-us-dollar-bill-SAYzxuS1O3M}{Jason Leung} on \href{https://unsplash.com}{Unsplash}}%
+    }
+    
+    \end{figure}
+  \end{center}
+	
+	\vspace*{0cm}
+  {\noindent\color{aaublue}\fboxsep0pt\colorbox{white}{\begin{tabular}{@{}p{\paperwidth}@{}}
+        \centerline{
+            \begin{minipage}{0.85\textwidth}
+                \bigskip
+                \bigskip
+                \centering
+                {\begin{spacing}{1.2}
+                \Huge{\textbf{\reporttitle}}
+                \end{spacing}}
+            \end{minipage}
+        }
+		
+	\centerline{
+	\begin{minipage}{0.52\textwidth}
+        % \bigskip
+        \centering
+        {\Large \authors}
+    \end{minipage}
+    }
+			
+    \centerline{
+    \begin{minipage}{0.5\textwidth}
+        \bigskip
+        \centering
+        {\large
+Cyber and Computer Technology, CCT5, \the\year% insert name of study, group number, year-month
+        } 
+    \end{minipage}
+    }
+			
+    \centerline{
+    \begin{minipage}{0.5\textwidth}
+        \bigskip
+        \centering
+%% Comment this section if you are not doing Bachelor or Master Project   
+        {\Large
+P5 Project
+      %Bachelor Project
+        }
+        \smallskip
+    \end{minipage}
+    }
+			
+  \end{tabular}}}
+
+  \vfill
+  \begin{figure}[!b]
+	\centering
+    \includegraphics[width=0.2\paperwidth]{report/AAUgraphics/aau_logo_circle_en.pdf}% comment this line in for English version
+  \end{figure}
+\end{titlepage}
+\restoregeometry

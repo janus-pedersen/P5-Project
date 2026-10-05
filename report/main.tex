@@ -1,0 +1,94 @@
+\documentclass[11pt,oneside,a4paper]{article}
+
+% Global variables and setup
+\newcommand{\authors}{
+    Emma Strandholdt Madsen, 
+    Maria Lilly Nielsen, 
+    Janus Langkilde Pedersen \& 
+    Peter Kaae Thorhauge
+}
+\newcommand{\reporttitle}{TBD}
+\newcommand{\subject}{TBD}
+
+% --- preamble first ---
+\input{report/setup/preamble}  % must load hyperref here
+
+% --- glossaries setup ---
+\usepackage[acronym]{glossaries-extra}
+\usepackage{csquotes}
+\makenoidxglossaries
+
+% --- glossary entries ---
+\input{report/setup/glossaries}  % contains \newacronym / \newglossaryentry
+
+\input{report/setup/macros}
+
+\begin{document}
+\pagenumbering{roman}
+
+% Metadata
+\author{\authors}
+\date{\today}
+\title{\reporttitle}
+% --- Front Page ---
+% \pagenumbering{gobble}
+% \input{content/colophon.tex}
+\clearpage
+\pagestyle{empty} %disable headers and footers
+
+\input{report/content/title-page}
+\input{report/content/front-page}
+
+\clearpage
+
+\pdfbookmark{Contents}{label:contents}
+% Remove the chapter numbers
+\renewcommand{\thesection}{\arabic{section}} 
+{
+    \linespread{1}\selectfont
+    \setcounter{tocdepth}{2}
+    \tableofcontents
+}
+\newpage
+\pagestyle{fancy} % enable headers and footers again
+\fancyhf{} % clears all header/footer fields
+\fancyhead[R]{\thepage} % or L if you want it on the left
+{
+    \linespread{1}\selectfont
+    \listoffigures
+    \listoftables
+}
+
+\newpage
+\pagenumbering{arabic}
+
+% --- Indsæt content filer her ---
+\input{report/content/Chapters/prerequisites}
+\newpage
+\label{mainmatter:start}
+\input{report/content/Chapters/introduction}
+\input{report/content/Chapters/background}
+\input{report/content/Chapters/analyse}
+\input{report/content/Chapters/design}
+\input{report/content/Chapters/implementation}
+\input{report/content/Chapters/testing}
+\input{report/content/Chapters/discussion}
+\input{report/content/Chapters/conclusion}
+
+\label{mainmatter:end}
+
+\begingroup
+\linespread{1}
+\printnoidxglossary[type=\acronymtype]
+\endgroup
+
+\cleardoublepage
+
+\addcontentsline{toc}{section}{Bibliography}
+\printbibliography
+\cleardoublepage
+
+\appendix
+\input{report/content/Chapters/appendix}
+
+\end{document}

@@ -1,0 +1,251 @@
+% \begingroup\expandafter\endgroup\iffalse{}\fi
+% This file is not meant to be compiled directly.
+
+\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
+\relax
+
+% \usepackage[sfdefault]{sourcesanspro}
+\newcommand{\headingfont}{\sffamily}
+
+\linespread{1.35}  
+
+\usepackage{parskip}
+\usepackage[default,osf]{sourcesanspro}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graphics and Tables
+% http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics
+% http://en.wikibooks.org/wiki/LaTeX/Tables
+% http://en.wikibooks.org/wiki/LaTeX/Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% for code blocks
+\usepackage{xparse}
+\usepackage{xstring}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[newfloat]{minted}
+\setminted{tabsize=2}
+\usepackage{listings}
+\lstset{frame=tb,
+ language=C,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+    % load a colour package
+\usepackage{xcolor}
+\usepackage{refcount}
+\usepackage{graphicx}
+\usepackage[expansion=false]{microtype}
+\usepackage{xurl}
+\setlength{\emergencystretch}{1em}
+% package to use colour in tables
+\usepackage[table]{xcolor}
+% Set up how figure and table captions are displayed
+\usepackage{caption}
+\captionsetup{%
+  justification=centering,
+  width=0.5\linewidth,
+  font=footnotesize,% set font size to footnotesize
+  labelfont=bf % bold label (e.g., Figure 3.2) font
+}
+% Make the standard latex tables look so much better
+% Enable the use of frames around, e.g., theorems
+% The framed package is used in the example environment
+\usepackage{framed}
+
+\usepackage{eurosym}
+
+
+% Adds support for full page background picture
+\usepackage{eso-pic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mathematics
+% http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defines new environments such as equation,
+% align and split 
+\usepackage{amsmath}
+% Adds new math symbols
+\usepackage{amssymb}
+% Use theorems in your document
+% The ntheorem package is also used for the example environment
+% When using thmmarks, amsmath must be an option as well. Otherwise \eqref doesn't work anymore.
+\usepackage[framed,amsmath,thmmarks]{ntheorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page Layout
+% http://en.wikibooks.org/wiki/LaTeX/Page_Layout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change margins, papersize, etc of the document
+\usepackage[
+  inner=28mm,% left margin on an odd page
+  outer=41mm,% right margin on an odd page
+  ]{geometry}
+\setlength{\headheight}{14pt}
+% Modify how \chapter, \section, etc. look
+% The titlesec package is very configureable
+\usepackage{titlesec}
+
+\definecolor{accent}{HTML}{211a52}
+
+\setlength{\fboxsep}{4pt}
+
+\newcommand{\secbox}[1]{\colorbox{accent}{\color{white}\hspace{4pt}#1\hspace{4pt}}}
+
+\titleformat{\chapter}[display]
+  {\headingfont\huge\bfseries}
+  {\colorbox{accent}{\color{white} \thechapter}}
+  {1ex}
+  {\Huge}
+
+\titleformat{\section}
+  {\headingfont\Huge\bfseries}
+  {\colorbox{accent}{\color{white} \thesection}}
+  {0.7em}
+  {}
+
+
+\titleformat{\subsection}
+  {\headingfont\Large\bfseries}
+  {\colorbox{accent}{\color{white} \thesubsection}}
+  {0.6em}
+  {}
+
+\titleformat{\subsubsection}
+  {\headingfont\large\bfseries}
+  {}
+  {0em}
+  {}
+
+%\titleformat*{\paragraph}{\normalfont\normalsize\bfseries}
+%\titleformat*{\subparagraph}{\normalfont\normalsize\bfseries}
+
+% Clear empty pages between chapters
+% \let\origdoublepage\cleardoublepage
+% \newcommand{\clearemptydoublepage}{%
+%   \clearpage
+%   {\pagestyle{empty}\origdoublepage}%
+% }
+% \let\cleardoublepage\clearemptydoublepage
+
+% Change the headers and footers
+\usepackage{fancyhdr}
+\usepackage{fancyvrb}
+\pagestyle{fancy}
+\fancyhf{} %delete everything
+\renewcommand{\headrulewidth}{0pt} %remove the horizontal line in the header
+\fancyhead[R]{\small\nouppercase\leftmark} %even page - chapter title
+\fancyhead[LO]{\small\nouppercase\rightmark} %uneven page - section title
+\fancyhead[L,RO]{\thepage} %page number on all pages
+% Do not stretch the content of a page. Instead,
+% insert white space at the bottom of the page
+\raggedbottom
+% Enable arithmetics with length. Useful when
+% typesetting the layout.
+\usepackage{calc}
+
+\usepackage{pageslts}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+% http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+  backend=biber,
+  bibencoding=utf8,
+  style=numeric-comp,
+  sorting=none,
+  defernumbers=true
+]{biblatex}
+\addbibresource{report/bib/mybib.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add bibliography and index to the table of
+% contents
+\usepackage[nottoc]{tocbibind}
+% Add the command \pageref{LastPage} which refers to the
+% page number of the last page
+% \usepackage{lastpage}
+% Add todo notes in the margin of the document
+\setlength{\marginparwidth}{2cm}
+\usepackage[
+%  disable, %turn off todonotes
+  colorinlistoftodos, %enable a coloured square in the list of todos
+  textwidth=\marginparwidth, %set the width of the todonotes
+  textsize=scriptsize, %size of the text in the todonotes
+  ]{todonotes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlinks
+% http://en.wikibooks.org/wiki/LaTeX/Hyperlinks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Enable hyperlinks and insert info into the pdf
+% file. Hypperref should be loaded as one of the 
+% last packages
+\usepackage{hyperref}
+\hypersetup{%
+    hypertexnames=false,%
+    pdfinfo={%
+    Title={\reporttitle},%
+    Author={\authors},%
+    Subject={\subject},%
+    Producer={pdfLaTeX},%
+    Creator={\authors},%
+    % Keywords={},%    
+    }%   
+}
+\usepackage{pdfpages}
+\usepackage{subcaption}
+
+\usepackage{letltxmacro}
+\LetLtxMacro{\oldautoref}{\autoref}
+\renewcommand{\autoref}[1]{\textbf{\oldautoref{#1}}}
+
+\usepackage{blindtext}
+
+
+\usepackage{lastpage}
+\usepackage{totcount}
+\regtotcounter{page}
+
+\usepackage{copyrightbox}
+
+\usepackage{multicol}
+
+% Source Code float
+\floatstyle{plaintop}
+\newfloat{source}{H}{los}[section]
+\floatname{source}{Source Code}
+\renewcommand{\thesource}{\arabic{source}}
+\newenvironment{sourceblock}{\captionsetup{type=source}}{}
+\SetupFloatingEnvironment{source}{name=Source Code}
+
+% Code Block float
+\floatstyle{plaintop}
+\newfloat{code}{H}{loc}[section]
+\floatname{code}{Code Block}
+\renewcommand{\thesource}{\arabic{source}}
+\newenvironment{codeblock}{\captionsetup{type=code}}{}
+\SetupFloatingEnvironment{code}{name=Code Block}
+
+
