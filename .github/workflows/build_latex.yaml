@@ -1,6 +1,9 @@
 name: Build LaTeX document
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -21,7 +24,7 @@ jobs:
       - name: Rename PDF
         run: mv main.pdf report.pdf
 
-      - name: Upload PDF file
+      - name: Upload PDF artifact
         uses: actions/upload-artifact@v6
         with:
           name: PDF
@@ -32,37 +35,33 @@ jobs:
     needs: build
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out repository
+        uses: actions/checkout@v6
 
       - name: Download PDF
         uses: actions/download-artifact@v7
         with:
           name: PDF
+          path: .
 
-      - name: Create tag
+      - name: Create release tag
         id: tag
         run: |
-            TAG="release-$(date +'%Y.%m.%d-%H%M')"
-            echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-        
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        
-            git tag "$TAG"
-            git push origin "$TAG"
+          TAG="release-$(date -u +'%Y.%m.%d-%H%M%S')"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git tag "$TAG"
+          git push origin "$TAG"
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub release
         run: |
-            gh release create "${{ steps.tag.outputs.tag }}" \
-              report.pdf \
-              --title "${{ steps.tag.outputs.tag }}" \
-              --generate-notes
+          gh release create "${{ steps.tag.outputs.tag }}" \
+            report.pdf \
+            --title "${{ steps.tag.outputs.tag }}" \
+            --generate-notes
         env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload PDF to release
-        uses: Roang-zero1/github-upload-release-artifacts-action@v3
-        with:
-          args: "report.pdf"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
