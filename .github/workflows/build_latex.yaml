@@ -15,6 +15,9 @@ jobs:
         with:
           root_file: report/main.tex
 
+      - name: Rename PDF
+        run: mv main.pdf report.pdf
+
       - name: Upload PDF file
         uses: actions/upload-artifact@v6
         with:
