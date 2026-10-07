@@ -1,9 +1,6 @@
 name: Build LaTeX document
 
-on:
-  push:
-    tags:
-      - "v*"
+on: push
 
 jobs:
   build:
@@ -39,10 +36,26 @@ jobs:
         with:
           name: PDF
 
-      - name: Create release
-        uses: Roang-zero1/github-create-release-action@v3
+      - name: Create tag
+        id: tag
+        run: |
+            TAG="release-$(date +'%Y.%m.%d-%H%M')"
+            echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+        
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        
+            git tag "$TAG"
+            git push origin "$TAG"
+
+      - name: Create GitHub release
+        run: |
+            gh release create "${{ steps.tag.outputs.tag }}" \
+              report.pdf \
+              --title "${{ steps.tag.outputs.tag }}" \
+              --generate-notes
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload PDF to release
         uses: Roang-zero1/github-upload-release-artifacts-action@v3
