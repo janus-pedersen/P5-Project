@@ -1,0 +1,20 @@
+\subsection{\gls{rfid}}
+\acrfull{rfid} is a wireless technology that, using radio waves both power and communicate with a radio transponder, commonly referred to as the \acrshort{rfid} tag. Unlike camera based technologies like barcodes or QR codes, \acrshort{rfid} does not require line-of-sight, and can therefor be hidden within an object, or occluded behind something while still enable tracking and identification. Due to this, its typically used for tracking animals, inventory management or logistics \cite{identification-to-sensing}.
+
+\subsubsection{Low Frequency (LF)} 
+Due to the lower frequency of the radio waves, typically in the range between 125 and 134.2 kHz. \cite{identification-to-sensing}, it has a higher penetration ability making it more robust against challenging environment. However, they lower frequency gives it a shorter range, typically around 50cm \cite{identification-to-sensing}. Its most commonly used when tagging pets and in car keys.
+
+\subsubsection{High Frequency (HF)}
+Operating at a frequency of 13.56 MHz, HF \acrshort{rfid} uses magnetic induction to power and communicate with passive transponders. Its reading range is typically limited to around 10 cm to 1 meter, depending on the reader and antenna configuration \cite{identification-to-sensing}.
+
+Most commonly known to be used in \acrfull{nfc}. \acrshort{nfc} is often found in access control to buildings and other facilities, as it requires the bearer to intentionally scan their access card or badge (the transponder) to the reader, due to its limited range. 
+
+\subsubsection{Ultra-High Frequency (UHF)}
+Operating at frequencies typically between 860 and 960 MHz, UHF \acrshort{rfid} provides a significantly longer reading range compared to LF and HF \cite{identification-to-sensing}, often reaching several meters. Unlike the lower frequencies, UHF primarily relies on electromagnetic wave propagation and backscattering to communicate with the transponder \cite{rfid-sensing-techniques}. Its ability to identify multiple tags within a short period makes it particularly suitable for inventory management, logistics, and asset tracking. However, its higher frequency makes it more susceptible to interference from surrounding materials, particularly metals and liquids, which can negatively affect reading reliability.
+
+
+\subsubsection{Active and Passive \acrshort{rfid} tags}
+The most commonly used type of \acrshort{rfid} tag is passive, which relies on energy transmitted by the reader to power its internal circuitry and communicate. Due to their relatively low manufacturing cost, usually , small size, and lack of an internal power source, passive tags are widely used in applications such as retail inventory management, logistics, and asset tracking. 
+
+Alternatively, active \acrshort{rfid} tags contain an internal power source, typically a battery, allowing them to transmit signals without relying on energy supplied by the reader. This generally enables longer communication ranges compared to passive tags. However, the additional components increase both the size and cost of the tags, with prices typically ranging from \$20 to over \$100 \cite{review-of-rfid-sensors}. Furthermore, the limited lifespan of the internal battery introduces additional maintenance requirements which make them unsuitable for large scale inventory management applications.
+
