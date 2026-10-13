@@ -1,0 +1,13 @@
+\subsection{Edge processing and offline synchronisation}
+\label{sec:edge-offline-synchronisation}
+
+% Current evidence, synthesis matrix and reproducible search record:
+% research/edge-offline-synchronisation/thematic-revision.md
+
+Edge computing places sensor-data processing and storage near the devices that generate observations. Hong et al.\ (2024) describe gateways that combine local analytics, storage and cloud communication. This division allows immediate processing near the sensors while cloud services support shared access and longer-term analysis \cite{hong2024iotedge}.
+
+Local filtering can turn repeated, imperfect readings into more useful information. Tang et al.\ (2024) use adaptive sliding windows to clean \acrshort{rfid} data, adjusting the window size according to tag movement and reading rates. The authors report reductions in redundant and missing data \cite{tang2024edgecleaning}. This illustrates the value of interpreting successive reading cycles together when deriving information about tagged assets.
+
+A \emph{store-and-forward} approach supports offline data collection by retaining data locally for later upload. Azure IoT Edge implements this approach by storing upstream messages locally and forwarding them in stored order after reconnection \cite{microsoftiotedgeoffline}. Its retention settings and available disk space determine how long queued data can be kept. This separates collection from transmission, allowing observations to accumulate during outages while the cloud view is updated later.
+
+Offline-first replication addresses shared data that multiple devices can update. Conflict-free replicated data types (CRDTs) allow local changes to be merged after communication resumes. Guidec et al.\ (2023) compare synchronisation methods under intermittent contacts. Their delta-state approach exchanges changes to replicated state and uses fewer messages than operation-based or full-state exchange in the evaluated scenarios \cite{guidec2023opportunisticcrdt}. Herrera et al.\ (2026) combine CRDT-based synchronisation with local rule evaluation in CAMS F Edge DTN, illustrating how applications can make decisions locally and reconcile distributed state asynchronously \cite{herrera2026cams}.
