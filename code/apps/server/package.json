@@ -1,16 +1,17 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@rfidtool/server",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify",
+    "postinstall": "pnpm cf-typegen",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
   },
   "dependencies": {
-    "@rfidtool/contract": "workspace:*"
+    "hono": "^4.13.14"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module"
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "wrangler": "^4.152.0"
+  }
 }

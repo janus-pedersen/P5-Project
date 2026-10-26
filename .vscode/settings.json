@@ -15,5 +15,9 @@
     // Monorepo directories
     { "pattern": "./code/apps/*/" },
     { "pattern": "./code/packages/*/" }
-  ]
+  ],
+
+  "files.associations": {
+    "wrangler.json": "jsonc"
+  }
 }
