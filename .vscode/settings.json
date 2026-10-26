@@ -1,0 +1,19 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "prettier.requireConfig": true,
+  "prettier.configPath": "code/.prettierrc.js",
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  "eslint.enable": true,
+  "eslint.debug": false,
+  "eslint.workingDirectories": [
+    // Monorepo directories
+    { "pattern": "./code/apps/*/" },
+    { "pattern": "./code/packages/*/" }
+  ]
+}
