@@ -38,8 +38,17 @@ export const RFIDTagEventPacketSchema = PacketSchema.extend({
     event: z.enum(['ADDED', 'REMOVED'])
 });
 
+/**
+ * At regular intervals, a snapshot is stored as a baseline for all upcoming events.
+ */
+export const RFIDTagSnapshotSchema = PacketSchema.extend({
+    type: z.literal('RFID_TAG_SNAPSHOT'),
+    tags: z.array(RFIDTagDataSchema)
+});
+
 export const PacketSchemas = z.union([
     GpsUpdatePacketSchema,
     RFIDTagEventPacketSchema,
+    RFIDTagSnapshotSchema,
     ErrorMessagePacketSchema
 ]);

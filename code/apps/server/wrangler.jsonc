@@ -10,5 +10,16 @@
     "observability": {
         "enabled": true
     },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "<DATABASE_NAME_2>",
+            "database_id": "<UUID2>"
+        }
+    ],
+    "route": {
+        "pattern": "rfidtool.app/*",
+        "zone_name": "rfidtool.app"
+    },
     "upload_source_maps": true
 }

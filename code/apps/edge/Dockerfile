@@ -11,7 +11,7 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm --filter ./apps/edge... build
 RUN pnpm --filter ./apps/edge --prod deploy --legacy /deploy
 
-# Production iamge
+# Production image
 FROM node:24-bookworm-slim
 
 WORKDIR /app

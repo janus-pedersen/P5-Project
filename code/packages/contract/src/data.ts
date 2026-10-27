@@ -11,6 +11,9 @@ export const RFIDTagDataSchema = z.object({
     rssi: z.number().negative()
 });
 
-export const SynchUpdateSchema = z.object({
+/**
+ * The actual payload to be sent in the POST request to the server
+ */
+export const SyncUpdateSchema = z.object({
     packets: z.array(PacketSchemas)
 });
