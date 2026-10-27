@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "exports": {
-    "default": "./dist/index.js",
-    "import": "./src/index.ts"
+    "import": "./src/index.ts",
+    "default": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",

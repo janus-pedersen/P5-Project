@@ -13,8 +13,10 @@
     "d1_databases": [
         {
             "binding": "DB",
-            "database_name": "<DATABASE_NAME_2>",
-            "database_id": "<UUID2>"
+            "database_name": "sync",
+            "database_id": "5f7cd2d4-57a6-4db1-8198-517d0083cdff",
+            "migrations_dir": "drizzle",
+            "migrations_pattern": "drizzle/*/migration.sql"
         }
     ],
     "route": {

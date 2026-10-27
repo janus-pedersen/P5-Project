@@ -2,16 +2,24 @@
   "name": "@rfidtool/server",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "pnpm run db:migrate:local && wrangler dev --persist-to .wrangler/state",
     "deploy": "wrangler deploy --minify",
     "postinstall": "pnpm cf-typegen",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "db:migrate": "drizzle-kit migrate",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local --persist-to .wrangler/state",
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
-    "hono": "^4.13.14"
+    "@rfidtool/contract": "workspace:*",
+    "drizzle-orm": "1.0.0-rc.5",
+    "hono": "^4.13.14",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
+    "dotenv": "^18.0.9",
+    "drizzle-kit": "1.0.0-rc.5",
     "wrangler": "^4.152.0"
   }
 }
