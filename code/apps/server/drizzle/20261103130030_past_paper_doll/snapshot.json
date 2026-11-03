@@ -1,0 +1,99 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "id": "fceea724-256c-476a-b021-17f829c8a0ea",
+  "prevIds": [
+    "8980081c-1cb8-422d-9ce9-a371ac42ad19"
+  ],
+  "ddl": [
+    {
+      "name": "device",
+      "entityType": "tables"
+    },
+    {
+      "name": "packet",
+      "entityType": "tables"
+    },
+    {
+      "table": "device",
+      "name": "cn",
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "entityType": "columns"
+    },
+    {
+      "table": "device",
+      "name": "mac",
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "entityType": "columns"
+    },
+    {
+      "table": "device",
+      "name": "hostname",
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "entityType": "columns"
+    },
+    {
+      "table": "packet",
+      "name": "device_cn",
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "entityType": "columns"
+    },
+    {
+      "table": "packet",
+      "name": "type",
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "entityType": "columns"
+    },
+    {
+      "table": "packet",
+      "name": "timestamp",
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "entityType": "columns"
+    },
+    {
+      "table": "packet",
+      "name": "payload",
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "entityType": "columns"
+    },
+    {
+      "table": "packet",
+      "name": "recieved",
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": "(unixepoch('subsec') * 1000)",
+      "generated": null,
+      "entityType": "columns"
+    }
+  ],
+  "renames": []
+}

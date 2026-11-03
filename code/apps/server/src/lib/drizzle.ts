@@ -1,5 +1,6 @@
 import { drizzle } from 'drizzle-orm/d1';
 import { Context } from 'hono';
-import { relations } from '../database/relations';
+import { relations } from '@rfidtool/database/relations';
 
-export const db = (c: Context) => drizzle(c.env.DB, { relations });
+export const db = (c: Context) => drizzle(c.env.DB, { relations,  });
+
