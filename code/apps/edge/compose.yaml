@@ -1,0 +1,23 @@
+# The configuration shared between all environments.
+# On our laptops, compose.override.yaml is automatically added on top.
+# On a Raspberry Pi, compose.prod.yaml is added instead.
+services:
+  sensors:
+    image: ghcr.io/janus-pedersen/rfidtool-edge-sensors:latest
+    restart: unless-stopped
+    depends_on: [sync]
+    environment:
+      TZ: Europe/Copenhagen
+      SYNC_URL: http://sync:8080
+
+  sync:
+    image: ghcr.io/janus-pedersen/rfidtool-edge-sync:latest
+    restart: unless-stopped
+    volumes:
+      - edge-data:/data
+    environment:
+      TZ: Europe/Copenhagen
+      DB_PATH: /data/edge.db
+
+volumes:
+  edge-data:

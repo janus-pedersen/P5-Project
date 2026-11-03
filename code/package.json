@@ -1,11 +1,13 @@
 {
+  "packageManager": "pnpm@12.16.1",
   "workspaces": [
     "apps/*",
+    "apps/edge/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "pnpm --filter './apps/*' --parallel run dev",
-    "build": "pnpm --filter './apps/*' --parallel run build",
+    "dev": "pnpm --filter './apps/**' --parallel run dev",
+    "build": "pnpm --filter './apps/**' --parallel run build",
     "format": "prettier",
     "format:check": "pnpm format --check --debug-check",
     "format:fix": "pnpm format --write",

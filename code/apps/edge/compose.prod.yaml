@@ -1,0 +1,28 @@
+# Production on a Raspberry Pi, used with: docker compose -f compose.yaml -f compose.prod.yaml up -d
+services:
+  sensors:
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    # TODO: Add the RFID reader's device, with a udev rule if it's connected over USB
+    devices:
+      - /dev/serial0:/dev/serial0
+      - /dev/i2c-1:/dev/i2c-1
+
+  sync:
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    volumes:
+      - /etc/rfidtool/certs:/etc/rfidtool/certs:ro
+    environment:
+      CLOUD_SYNC_URL: https://rfidtool.app/device/sync
+
+  # Keeps the two services above updated with the latest images
+  watchtower:
+    image: nickfedor/watchtower:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_LABEL_ENABLE: 'true'
+      WATCHTOWER_CLEANUP: 'true'
+      WATCHTOWER_POLL_INTERVAL: '3600'
