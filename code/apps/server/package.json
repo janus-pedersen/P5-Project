@@ -11,6 +11,7 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@hono/zod-validator": "^0.9.1",
     "@rfidtool/contract": "workspace:*",
     "@rfidtool/database": "workspace:*",
     "drizzle-orm": "1.0.0-rc.5",

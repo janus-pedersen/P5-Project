@@ -52,3 +52,7 @@ export const PacketSchemas = z.union([
     RFIDTagSnapshotSchema,
     ErrorMessagePacketSchema
 ]);
+
+export const PayloadSchema = z.object({
+    packets: z.array(PacketSchemas)
+});
