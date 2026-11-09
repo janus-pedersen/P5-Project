@@ -12,4 +12,5 @@ export const relations = defineRelations({ devices, packets }, r => ({
     devices: {
         packets: r.many.packets()
     }
+    // TODO: Define relations between tools, tags, and packets
 }));
