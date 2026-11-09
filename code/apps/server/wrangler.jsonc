@@ -14,7 +14,7 @@
         {
             "binding": "DB",
             "database_name": "sync",
-            "database_id": "5f7cd2d4-57a6-4db1-8198-517d0083cdff",
+            "database_id": "ed3190ba-97a9-4247-bec5-1f9cccd259cd",
             "migrations_dir": "drizzle",
             "migrations_pattern": "drizzle/*/migration.sql"
         }

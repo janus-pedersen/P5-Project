@@ -1,1 +1,0 @@
-ALTER TABLE `device` ADD `hostname` text NOT NULL;
