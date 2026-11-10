@@ -17,6 +17,18 @@ export const cert = createMiddleware<{ Variables: CertVariables }>(async (c, nex
         .find(dn => dn.startsWith('CN='))
         ?.substring(3);
 
+    const isDev = process.env.NODE_ENV === 'development';
+    if (isDev) {
+        console.log('Development mode: skipping certificate verification');
+        c.set('cert', {
+            cn: 'dev-cn',
+            revoked: false,
+            verified: true
+        });
+        await next();
+        return;
+    }
+
     c.set('cert', {
         cn: cn,
         revoked: cert?.certRevoked === '1',

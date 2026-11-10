@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { db } from './lib/drizzle';
 import { zValidator } from '@hono/zod-validator';
 import { PayloadSchema } from '@rfidtool/contract';
-import { packets } from '@rfidtool/database/schema';
+import { packets, packet_tags, tags } from '@rfidtool/database/schema';
 import { cert } from './middleware/cert';
 import { secure } from './middleware/secure';
 
@@ -22,14 +22,66 @@ export const deviceRouter = new Hono<{ Bindings: CloudflareBindings }>()
         const { packets: payloadPackets } = payload;
 
         for (const packet of payloadPackets) {
-            await db(c)
+            const dbPackets = await db(c)
                 .insert(packets)
                 .values({
                     deviceCn: c.get('cert').cn,
                     payload: JSON.stringify(packet),
                     type: packet.type,
                     timestamp: new Date(packet.timestamp)
-                });
+                })
+                .returning();
+
+            switch (packet.type) {
+                case 'RFID_TAG_EVENT':
+                    await db(c).batch([
+                        db(c)
+                            .insert(tags)
+                            .values({
+                                epc: packet.tag.epc
+                            })
+                            .onConflictDoNothing({
+                                target: tags.epc
+                            }),
+
+                        db(c)
+                            .insert(packet_tags)
+                            .values({
+                                epc: packet.tag.epc,
+                                packetId: dbPackets[0].id
+                            })
+                            .onConflictDoNothing({
+                                target: [packet_tags.epc, packet_tags.packetId]
+                            })
+                    ]);
+                    break;
+                case 'RFID_TAG_SNAPSHOT':
+                    for (const tag of packet.tags) {
+                        await db(c).batch([
+                            db(c)
+                                .insert(tags)
+                                .values({
+                                    epc: tag.epc
+                                })
+                                .onConflictDoNothing({
+                                    target: tags.epc
+                                }),
+
+                            db(c)
+                                .insert(packet_tags)
+                                .values({
+                                    epc: tag.epc,
+                                    packetId: dbPackets[0].id
+                                })
+                                .onConflictDoNothing({
+                                    target: [packet_tags.epc, packet_tags.packetId]
+                                })
+                        ]);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         return c.json({ success: true });

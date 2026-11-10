@@ -7,6 +7,7 @@ interface SecureVariables {
 
 export const secure = createMiddleware<{ Variables: SecureVariables }>(async (c, next) => {
     const certificate = c.get('cert') as Required<CertInformation>;
+    console.log('Certificate Information:', certificate);
     if (!certificate.verified || certificate.revoked) {
         return c.text('Unauthorized', 401);
     }
