@@ -93,3 +93,5 @@ export const deviceRouter = new Hono<{ Bindings: CloudflareBindings }>()
         });
         return c.json(devicePackets);
     });
+
+    
